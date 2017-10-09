@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>run-scan-app</title>
+  <!-- <link rel="icon" type="image/png" href="http://localhost:8080/img/icon16.png" sizes="16x16"> -->
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  <!-- <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script> -->
+
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+  <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <!-- Socket.io codes -->
+  <script src="socket.io/socket.io.js"></script>
+  <!-- UUID codes -->
+  <script src="http://wzrd.in/standalone/uuid%2Fv1@latest"></script>
+
+  <!-- <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script> -->
+  <!-- <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script> -->
+  <!-- <script type="text/javascript" src="/roslibjs/build/roslib.min.js"></script> -->
+  <!-- yaml library for saving and loading files -->
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+  <!-- <link rel="stylesheet" type="text/css" href="/css/custom.css"> -->
+  <link rel="stylesheet" type="text/css" href="main.css" />
+  <!-- <link id="selected-theme" rel="stylesheet" type="text/css" href="/css/classic-theme.css" /> -->
+  <link id="selected-theme" rel="stylesheet" type="text/css" href="dark-theme.css" />
+  <link rel="stylesheet" type="text/css" href="digital-font/stylesheet.css" />
+
+
+</head>
+
+
+<body onload="init()">
+  <div id='main-title'>
+    <div class='column left'>
+      <input type="file" id="config-input">
+      <input type="file" id="upload-input" name="pic" accept="text/plain" style="display:none">
+
+      <!-- <img id='upload-config' src='img/classic/upload.png' /> -->
+      <!-- <img id='save-config' src='img/classic/save.png' /> -->
+      <!-- <img id='config-menu' src='img/classic/config.png' /> -->
+
+    </div>
+    <h2 id='main-title-text'>ROS MultiMaster App</h2>
+    <div class='column'>
+      <div class="dropdown">
+        <button class="dropbtn">Theme</button>
+        <div class="dropdown-content">
+          <a href="#" onclick="updateTheme('classic')">Classic</a>
+          <a href="#" onclick="updateTheme('dark')">Dark</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="network_block half-page">
+
+    <div class="computer_block section-block">
+      <h4>Athletes</h4>
+      <hr class="thick_line">
+
+      <!-- <label for="speed">Select a speed</label>
+      <select name="speed" id="speed">
+  <option>Slower</option>
+  <option>Slow</option>
+  <option selected="selected">Medium</option>
+  <option>Fast</option>
+  <option>Faster</option>
+</select> -->
+
+      <!-- <form> -->
+      <div id="computer_fields"></div>
+      <button id="add_tag_btn" onclick="scan_for_id()" class="btn btn-default">Add Tag</button>
+
+
+      <div id="athlete_timers">
+      </div>
+
+
+      <!-- <div id='timer-div' class='left-div'>
+        <button id="start_timing" onclick="request_time()" class="btn btn-default">Start Timing</button>
+        <p id='timer-text'>0.0</p>
+      </div> -->
+
+      <div id='runner-count-div' class='left-div'>
+        <button id='reset-runner-count' onclick="reset_runner_count()" class="btn btn-default">Reset Count</button>
+        <p id='runner-count-text'>0</p>
+      </div>
+
+
+      <div id="group_input">
+        Group name: <input type="text" id="group_name" style="width:100px;">
+        <button id="add_group_btn" onclick="add_group()" class="btn btn-default">Add Group</button>
+      </div>
+
+      <div id="group_timers">
+      </div>
+
+      <!-- <button id="start_topic_routing" onclick="pause_scan()" class="btn btn-default">Pause Scanning</button> -->
+      <!-- <button id="start_topic_routing" onclick="stop_scan()" class="btn btn-default">Stop Scanning</button> -->
+      <!-- <button id="new_computer_field" class="btn btn-default"><img src='img/add.png'/>Add Computer</button> -->
+      <!-- <br> -->
+      <!-- <button id="submit_computer_fields" class="btn btn-default">Submit</button> -->
+      <!-- </form> -->
+    </div>
+
+
+  </div>
+
+  <div class="message_block half-page">
+
+    <div class="rostopic_mapper section-block">
+      <h4>Scan Controls</h4>
+      <hr class="thick_line">
+      <form>
+        <div id="rostopic_fields"></div>
+        <!-- <button id="new_rostopic_field" class="btn btn-default"><img src='img/add.png'/>Add Rostopic Route</button><br> -->
+        <!-- <button id="refresh_rostopic_fields" class="btn btn-default">Refresh</button> -->
+      </form>
+      <hr class="thick_line">
+      <button id="start_topic_routing" onclick="resume_scan()" class="btn btn-default">Resume Scanning</button>
+      <button id="start_topic_routing" onclick="pause_scan()" class="btn btn-default">Pause Scanning</button>
+      <button id="start_topic_routing" onclick="stop_scan()" style="background-color: red;" class="btn btn-default">Stop Scanning</button>
+
+    </div>
+
+    <div class="console_block section-block">
+      <h4>Console</h4>
+      <hr class="thick_line">
+      <div id="console-div"> </div>
+    </div>
+
+    <!-- <div class="rosservice_mapper section-block">
+      <h4>ROS Service Mapper</h4>
+      <hr class="thick_line">
+      <form>
+        <div id="rosservice_fields"></div>
+        <button id="new_rosservice_field" class="btn btn-default"><img src='img/add.png'/> Add Rosservice Route</button><br>
+        <button id="refresh_rosservice_fields" class="btn btn-default">Refresh</button>
+      </form>
+      <hr class="thick_line">
+      <button id="start_service_routing" class="btn btn-default">Start Service Routing</button>
+    </div> -->
+
+  </div>
+  <script type="text/javascript" src="js/console.js"></script>
+  <script type="text/javascript" src="js/client_socket.js"></script>
+  <!-- <script type="text/javascript" src="/js/computer_fields.js"></script> -->
+  <!-- <script type="text/javascript" src="/js/rostopic_map.js"></script> -->
+  <!-- <script type="text/javascript" src="/js/rosservice_map.js"></script> -->
+  <!-- <script type="text/javascript" src="/js/save_load.js"></script> -->
+  <!-- <script type="text/javascript" src="/js/themes.js"></script> -->
+
+</body>
+
+</html>

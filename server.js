@@ -1,0 +1,209 @@
+#!/usr/bin/env node
+
+/* Run Scan Node Project! */
+var express = require('express');
+var path = require('path');
+
+var SerialPort = require('serialport');
+
+var port = new SerialPort('/dev/ttyUSB0', {
+  baudRate: 115200
+});
+
+// The open event is always emitted
+port.on('open', function() {
+  // open logic
+  console.log("Opened port!");
+});
+
+// Open errors will be emitted as an error event
+port.on('error', function(err) {
+  console.log('Error: ', err.message);
+})
+
+
+// get current time in milliseconds
+Date.now()
+
+
+function pause_scanning(){
+  console.log('Pausing...');
+  port.write('Hi Mom!');
+  port.write("pause");
+  print(ser.readline().decode("utf-8"))
+  print(ser.readline().decode("utf-8"))
+}
+
+function resume_scanning(){
+  console.log('Resume scanning');
+  port.write('Hi Mom!');
+  port.write("resume");
+  print(ser.readline().decode("utf-8"))
+  print(ser.readline().decode("utf-8"))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+var RMS = require('./lib/run_scanner');
+require('colors')
+
+// Parse command line arguments
+var argv = require('yargs').argv;
+
+// Set up an express server
+var app = express();
+app.use(express.static('public'));
+
+// -- Paths for express app, will be replaced with socket functions --//
+
+// viewed at http://localhost:8080
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+// Set up a handler to save a file
+app.get('/save', function(req, res) {
+  var json_string = req.query.json;
+  var filename = req.query.name;
+  var fs = require('fs');
+  fs.writeFile("config_files/" + filename, json_string, function(err) {
+    if (err)
+      return console.log(err);
+    }
+  );
+  console.log("File saved.");
+});
+
+// Set up a handler to load a file
+app.get('/load', function(req, res) {
+  var filename = req.query.file;
+
+  var fs = require('fs');
+  if (filename != "") {
+    fs.readFile("config_files/" + filename, 'utf8', function(err, data) {
+      if (err)
+        return console.log(err);
+      var content = JSON.parse(data);
+      console.log(content);
+      res.send(content);
+    });
+    console.log("File loaded.");
+  } else {
+    res.send({});
+    console.log("Failed to load file.");
+
+  }
+});
+
+//-- Socket.io server, the new communication standard with web client --//
+var server = require('http').createServer();
+// var io = require('socket.io')(server);
+// var client_connection;
+// io.on('connection', function(client) {
+//
+//   // Connection to the client-end socket
+//   console.log('Resetting state'.blue.bold + ' new connection to client');
+//   rms.disconnect_all();
+//   reset_ros_mm_obj();
+//   rms.reset_rms();
+//
+//   client_connection = client;
+//   client.on('update', function(data) {
+//     console.log('Data from client:'.magenta.bold);
+//     console.log(JSON.stringify(data).magenta.bold);
+//     if (data.msg == 'add-computer') {
+//       rms.find_and_add_new_computers(data.data);
+//     }
+//     else if (data.msg == 'new-topics') {
+//       rms.find_and_add_new_topics(data.data);
+//     }
+//   });
+//   client.on('request', function(data) {
+//     console.log('got a request: '+data);
+//     if(data=='topic-names'){
+//       rms.update_topics();
+//     }else{
+//       client.emit('update',rms.topic_names);
+//     }
+//   });
+//   client.on('test', function(data) {
+//     rms.push_update_to_client()
+//   });
+//   client.on('reset', function(data) {
+//     // Connection to the client-end socket
+//     console.log('Resetting state'.blue.bold + ' for reason: '+data);
+//     rms.disconnect_all();
+//     reset_ros_mm_obj();
+//     rms.reset_rms();
+//   });
+//   client.on('disconnect', function() {});
+// });
+// server.listen(3000);
+//
+// // Main ROS Multimaster object that gets passed to the server to show updates from the user
+// // and that is compared to the same structured object from the server to show changes
+// var ros_mm_obj = {
+//   //structure of ros websocket conections
+//   // key = ip_address of the ros websocket masters
+//   // values = 'computer_name'...
+//   'computers': {},
+//   //structure for ros topics
+//   'topics': {},
+//   //structure for ros services
+//   'services': {}
+// };
+//
+// function reset_ros_mm_obj() {
+//   var ros_mm_obj = {
+//     'computers': {},
+//     'topics': {},
+//     'services': {}
+//   };
+// }
+//
+// // var rms = new RMS.ROSMasterSynchronizer(io);
+//
+// // rms.add_computer('hello','172.25.21.250');
+// // rms.connect_to_all_computers();
+// // rms.update_computer_status('hello','wow');
+// // rms.update_computer_status('hello','error');
+//
+// // If desired, load a file
+// if (argv.config) {
+//   var filename = argv.config;
+//   console.log("Loading: " + filename);
+//   var fs = require('fs');
+//   fs.readFile(filename, 'utf8', function(err, data) {
+//     if (err)
+//       return console.log(err);
+//     var content = JSON.parse(data);
+//     console.log(content);
+//     rms.load_configuration(content);
+//   });
+// }
+
+var server = app.listen(8081);
+
+// Gracefully handle SIGINT / Ctrl-C
+process.on('SIGINT', function() {
+  console.log(" ");
+  console.log("Caught Ctrl-C, exiting...!");
+  // Stop the server
+  server.close();
+  // Disconnect from ROS
+  // rms.disconnect_all();
+  // Exit
+  process.exit();
+});
+
+console.log("Server started on http://localhost:8081");

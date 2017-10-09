@@ -1,0 +1,67 @@
+hr.thick_line {
+  display: block;
+  height: 10px;
+  border: 0;
+  border-top: 5px solid #808080;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.subsection {
+  background-color: #DCDCDC;
+}
+
+.rostopic_mapper {
+  background-color: #FF7F50;
+}
+
+.rosservice_mapper {
+  background-color: #7FFF00;
+}
+
+.file_block {
+  background-color: #FFD700;
+}
+
+.computer_block {
+  background-color: #00FFFF;
+}
+
+.subsection {
+  background-color: #DCDCDC;
+  background-clip: content-box;
+  margin: 0 15px 5px;
+  padding: 0px;
+}
+
+.console_block {
+  background-color: #FFD700;
+}
+
+
+/* Dropdown Button */
+
+.dropbtn {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+
+/* Links inside the dropdown */
+
+.dropdown-content a {
+  color: black;
+}
+
+
+/* Change color of dropdown links on hover */
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1
+}
+
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+
+.dropdown:hover .dropdown {
+  background-color: #B3E5FC;
+}
