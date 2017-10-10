@@ -5,10 +5,10 @@ from aiohttp import web
 import socketio
 import asyncio
 # import redis
-import eventlet
+#import eventlet
 # import aiohttp_cors
 
-from flask import Flask, render_template
+#from flask import Flask, render_template
 
 # r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
