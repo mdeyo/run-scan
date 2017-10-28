@@ -527,17 +527,7 @@ function setTagName(id, name) {
   }
 }
 
-// connect socket to server
-//var socket = io.connect('http://localhost:3000');
-var socket = io.connect('192.168.42.1:8080');
-socket.on('connect', function() {
-  clear_console();
-  add_console_msg('green', 'Connected to the MultiMaster Server!');
-});
-socket.on('disconnect', function() {
-  clear_console();
-  add_console_msg('red', 'Disconnected from the MultiMaster Server!');
-});
+
 
 start_time = 0
 var main_start_time;
@@ -569,9 +559,10 @@ function reset_runner_count() {
 /////////////////////////////
 
 if (use_socket) {
+
   // connect socket to server
-  var socket = io.connect('http://localhost:3000');
-  var socket = io.connect('127.0.01:3000');
+  //var socket = io.connect('http://localhost:3000');
+  var socket = io.connect('192.168.42.1:8080');
   socket.on('connect', function() {
     clear_console();
     add_console_msg('green', 'Connected to the MultiMaster Server!');
@@ -580,6 +571,7 @@ if (use_socket) {
     clear_console();
     add_console_msg('red', 'Disconnected from the MultiMaster Server!');
   });
+
 
   socket.on('reply', function(data) {
     console.log('reply:' + data);

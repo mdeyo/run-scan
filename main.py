@@ -18,7 +18,7 @@ sample_id_flag = False
 async def connect(sid, environ):
     #print("connect ", sid)
     print('Connected to a client!!')
-    await sio.emit('hello', 'data')
+    # await sio.emit('hello', 'data')
 
 
 @sio.on('update')
@@ -202,9 +202,6 @@ def read_loop():
                         print('closest time: ' + str(closest_time))
                         # emit_from_read('result', i + ':' + str(timestamp))
                         send_result_time(i, closest_time)
-                        # loop = asyncio.get_event_loop()
-                        # loop.run_until_complete(send_result_time(i, closest_time))
-                        # loop.close()
 
                         list_to_delete.append(i)
 
@@ -253,10 +250,6 @@ def read_loop():
                         print(line)
                         emit_from_read('voltage', new_split[1])
 
-                # printype(line))
-                # print('got here at ' + str(t))
-                # print('time:' + str(round(t - start_time, 2)))
-
                 if t - start_time > 5 and not paused:
                     #print('got here')
                     pause_scan()
@@ -270,8 +263,7 @@ def read_loop():
                     print('Starting to scan')
                     # gotime = input("Want to start scanning?")
                     start_time = time.time()
-
-                    ser.write('hello\r\n'.encode())
+                    # ser.wsrite('hello\r\n'.encode())
 
             else:
                 print('not connected to device')
