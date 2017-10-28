@@ -137,7 +137,10 @@ asyncio.set_event_loop(global_loop)
 def startSocket():
     global sio
     global app
-    web.run_app(app, host='127.0.0.1', port=3000)
+    #web.run_app(app, host='192.168.42.2', port=3000)
+    #web.run_app(app, host='127.0.0.1', port=3000)
+    web.run_app(app)	
+	
     # wrap Flask application with socketio's middleware
     # app = socketio.Middleware(sio, app)
     # deploy as an eventlet WSGI server
@@ -158,7 +161,8 @@ def reading_loop():
 
 
 ser = None
-ports = ['/dev/ttyUSB0', '/dev/ttyUSB1']
+#ports = ['/dev/ttyAMA0']
+ports = ['/dev/ttyUSB0', '/dev/ttyUSB1','/dev/ttyAMA0']
 for p in ports:
     ser = None
     try:
@@ -208,10 +212,12 @@ def pause_scan():
     global sio  # external_sio
 
     if ser:
-        print('** pausing **')
         cmd = b"\x89"
+        print(ser)
+        print(ser.flush())
         ser.write(cmd)
         paused = True
+        print('** pausing **')
         # await sio.emit('scanning', False)
     else:
         print('** no device to pause **')
@@ -278,7 +284,8 @@ def read_loop():
                 try:
                     line = ser.readline().decode("utf-8").rstrip('\r\n').split(',')
                 except serial.serialutil.SerialException:
-                    print('*** SerialException ***')
+                    #print('*** SerialException ***')
+                    v = 1
 
                 t = round(time.time(), 2)
 
