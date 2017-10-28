@@ -4,76 +4,11 @@ import threading
 from aiohttp import web
 import socketio
 import asyncio
-# import redis
-#import eventlet
 # import aiohttp_cors
 
-#from flask import Flask, render_template
-
-# r = redis.StrictRedis(host='localhost', port=6379, db=0)
-
-# Async server setup
-# mgr = socketio.KombuManager('redis://')
-# mgr = socketio.RedisManager('redis://')
-# mgr = socketio.AsyncRedisManager('redis://')
-# external_sio = socketio.KombuManager('redis://', write_only=True)
-
-# mgr = socketio.AsyncRedisManager('redis://', write_only=True)
-# sio = socketio.AsyncServer(client_manager=mgr)
-
-# sio = socketio.AsyncServer(client_manager=mgr)
 sio = socketio.AsyncServer()
 app = web.Application()
 sio.attach(app)
-# cors = aiohttp_cors.setup(app)
-
-
-# sio = socketio.Server(client_manager=external_sio)
-
-# @asyncio.coroutine
-# def handler(request):
-#     return web.Response(
-#         text="Hello!",
-#         headers={
-#             "X-Custom-Server-Header": "Custom data",
-# })
-
-
-# `aiohttp_cors.setup` returns `aiohttp_cors.CorsConfig` instance.
-# The `cors` instance will store CORS configuration for the
-# application.
-# cors = aiohttp_cors.setup(app)
-
-# To enable CORS processing for specific route you need to add
-# that route to the CORS configuration object and specify its
-# CORS options.
-# resource = cors.add(app.router.add_resource("/"))
-# route = cors.add(
-#     resource.add_route("GET", handler), {
-#         "http://client.example.org": aiohttp_cors.ResourceOptions(
-#             allow_credentials=True,
-#             expose_headers=("X-Custom-Server-Header",
-#                             "Access-Control-Allow-Origin"),
-#             allow_headers=("X-Requested-With", "Content-Type"),
-#             max_age=3600,
-#         )
-#     })
-
-# sio = socketio.Server(async_mode='eventlet', client_manager=external_sio)
-# app = Flask(__name__)
-
-
-# @app.route('/')
-# def index():
-#     """Serve the client-side application."""
-# return render_template('index.html')
-
-
-# async def index(request):
-#     """Serve the client-side application."""
-#     with open('index.html') as f:
-#         return web.Response(text=f.read(), content_type='text/html')
-
 
 read_flag = True
 sample_id_flag = False
@@ -127,9 +62,6 @@ def disconnect(sid):
     print('disconnect ', sid)
 
 
-# app.router.add_static('/static', 'static')
-# app.router.add_get('/', index)
-
 global_loop = asyncio.new_event_loop()
 asyncio.set_event_loop(global_loop)
 
@@ -137,11 +69,9 @@ asyncio.set_event_loop(global_loop)
 def startSocket():
     global sio
     global app
+    
+    #web.run_app(app)
     web.run_app(app, host='127.0.0.1', port=3000)
-    # wrap Flask application with socketio's middleware
-    # app = socketio.Middleware(sio, app)
-    # deploy as an eventlet WSGI server
-    # eventlet.wsgi.server(eventlet.listen(('localhost', 3000)), app)
 
 
 def scan_and_send_next_id():
@@ -149,16 +79,9 @@ def scan_and_send_next_id():
     sample_id_flag = True
 
 
-def reading_loop():
-    # loop = asyncio.new_event_loop()
-    # asyncio.set_event_loop(loop)
-    while 1:
-        print('in the loop')
-        time.sleep(1)
-
-
 ser = None
-ports = ['/dev/ttyUSB0', '/dev/ttyUSB1']
+#ports = ['/dev/ttyAMA0']
+ports = ['/dev/ttyUSB0', '/dev/ttyUSB1','/dev/ttyAMA0']
 for p in ports:
     ser = None
     try:
@@ -169,7 +92,6 @@ for p in ports:
         # check which port was really used
         print("Connected to device at " + ser.name)
         break
-# ser.write('hello\n'.encode())     # write a string
 
 saved = {}
 currently_scanning = {}
@@ -192,11 +114,6 @@ def remove_keys(dic, keys):
     return dic
 
 
-def future_callback(result):
-    print('got future callback')
-    print(result)
-
-
 def emit_from_read(name, data):
     # global sio
     global global_loop
@@ -208,24 +125,15 @@ def pause_scan():
     global sio  # external_sio
 
     if ser:
-        print('** pausing **')
         cmd = b"\x89"
+        print(ser)
+        print(ser.flush())
         ser.write(cmd)
         paused = True
+        print('** pausing **')
         # await sio.emit('scanning', False)
     else:
         print('** no device to pause **')
-    # emit_from_read('reply', 'hello')
-    # external_sio.emit('reply', 'hello')
-
-    # loop = asyncio.get_event_loop()
-    # loop.run_until_complete(sio.emit('reply', 'hello'))
-    # eventloop.close()
-
-    # sio.emit('result', 'hello')
-    # print('got passed the emit')
-    # print(ser.readline().decode("utf-8"))
-    # print(ser.readline().decode("utf-8"))
 
 
 def resume_scan():
@@ -239,10 +147,6 @@ def resume_scan():
 
     else:
         print('* no device to resume *')
-    # print(ser.readline().decode("utf-8"))
-    # print(ser.readline().decode("utf-8"))
-    # print(ser.readline().decode("utf-8"))
-    # print(ser.readline().decode("utf-8"))
 
 
 def find_closest_time(data_list):
@@ -278,7 +182,8 @@ def read_loop():
                 try:
                     line = ser.readline().decode("utf-8").rstrip('\r\n').split(',')
                 except serial.serialutil.SerialException:
-                    print('*** SerialException ***')
+                    #print('*** SerialException ***')
+                    v = 1
 
                 t = round(time.time(), 2)
 
