@@ -8,6 +8,7 @@
 
 .registered_groups {
   display: inline-flex;
+  width: 100%;
 }
 
 .group_select {
