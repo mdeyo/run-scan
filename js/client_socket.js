@@ -613,9 +613,10 @@ if (use_socket) {
     var strings = data.split(':');
     var id = strings[0];
     var timestamp = parseFloat(strings[1]);
-    console.log('Name: ' + saved_ids[id].name + " timestamp: " + timestamp.toString());
+
 
     if (id in saved_ids) {
+      console.log('Name: ' + saved_ids[id].name + " timestamp: " + timestamp.toString());
       var lap_time = (timestamp - saved_ids[id].start_time);
       console.log('Lap time: ' + (lap_time).toString());
       saved_ids[id].laps.push(lap_time);
