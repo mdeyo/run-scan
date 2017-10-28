@@ -69,7 +69,7 @@ asyncio.set_event_loop(global_loop)
 def startSocket():
     global sio
     global app
-    
+
     web.run_app(app)
     #web.run_app(app, host='127.0.0.1', port=3000)
 
@@ -81,7 +81,7 @@ def scan_and_send_next_id():
 
 ser = None
 #ports = ['/dev/ttyAMA0']
-ports = ['/dev/ttyUSB0', '/dev/ttyUSB1','/dev/ttyAMA0']
+ports = ['/dev/ttyUSB0', '/dev/ttyUSB1', '/dev/ttyAMA0']
 for p in ports:
     ser = None
     try:
@@ -126,7 +126,7 @@ def pause_scan():
 
     if ser:
         cmd = b"\x89"
-        #print(ser)
+        # print(ser)
         ser.flush()
         ser.write(cmd)
         paused = True
@@ -249,8 +249,10 @@ def read_loop():
                     line = line[0]
                     #print('line:' + line)
                     new_split = line.split(":")
-                    if(new_split[0]=="v"):
+                    if(new_split[0] == "v"):
                         print(line)
+                        emit_from_read('voltage', new_split[1])
+
                 # printype(line))
                 # print('got here at ' + str(t))
                 # print('time:' + str(round(t - start_time, 2)))

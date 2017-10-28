@@ -606,6 +606,10 @@ if (use_socket) {
 
   socket.on('scanning', function(data) {
     console.log('Scanning status: ' + data);
+  });
+
+  socket.on('voltage', function(data) {
+    console.log('Battery status ' + data,toString()+' V');
   })
 
   socket.on('result', function(data) {
