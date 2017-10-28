@@ -49,7 +49,7 @@ var use_socket = true; //can be false when debugging
 ////////////////////// Debugging variables Section Start //////////////////////
 
 // override socket while debugging without the full system
-use_socket = false;
+// use_socket = false;
 
 // TODO temporary for MIT XC time trial //
 var time_trial = {
@@ -601,7 +601,7 @@ if (use_socket) {
   });
 
   socket.on('voltage', function(data) {
-    console.log('Battery status ' + data,toString()+' V');
+    console.log('Battery status ' + data.toString()+' V');
   })
 
   socket.on('result', function(data) {
