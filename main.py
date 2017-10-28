@@ -214,33 +214,39 @@ def read_loop():
                     list_to_delete = []
 
                 if len(line) == 2:  # tag scan data from arduino
-                    rssi = int(line[0].split(':')[1])
-                    iid = line[1].split(':')[1].rstrip('\r\n')
-                    timestamp = round(t - start_time, 2)
-                    print('got id:' + str(iid) + ' rssi:' + str(rssi))
+                    try:
+                        rssi = int(line[0].split(':')[1])
+                        iid = line[1].split(':')[1].rstrip('\r\n')
+                        timestamp = round(t - start_time, 2)
+                        print('got id:' + str(iid) + ' rssi:' + str(rssi))
 
-                    if sample_id_flag:
-                        emit_from_read('scan-id', iid)
-                        sample_id_flag = False
+                        if sample_id_flag:
+                            emit_from_read('scan-id', iid)
+                            sample_id_flag = False
 
-                    if iid not in last_time_stamp:
-                        last_time_stamp[iid] = 0 - min_lap_time
-
-                    if t - last_time_stamp[iid] < min_lap_time:
-                        print('not greater than min lap time!')
-                        print(t)
-                        print(last_time_stamp[iid])
-                        print(t - last_time_stamp[iid])
-                    else:
-                        if iid in saved:
-                            saved[iid] = saved[iid] + \
-                                [str(rssi) + ':' + str(timestamp)]
+                        if iid not in last_time_stamp:
+                            last_time_stamp[iid] = 0 - min_lap_time
+                        
+                        if t - last_time_stamp[iid] < min_lap_time:
+                            print('not greater than min lap time!')
+                            #print(t)
+                            #print(last_time_stamp[iid])
+                            #print(t - last_time_stamp[iid])
                         else:
-                            saved[iid] = [str(rssi) + ':' + str(timestamp)]
+                            if iid in saved:
+                                saved[iid] = saved[iid] + \
+                                    [str(rssi) + ':' + str(timestamp)]
 
-                        currently_scanning[iid] = t
-                        print(saved)
-                        print(currently_scanning)
+                            else:
+                                saved[iid] = [str(rssi) + ':' + str(timestamp)]
+                            currently_scanning[iid] = t
+                            #print(saved)
+                            #print(currently_scanning)
+
+                    except (ValueError, IndexError):
+                        print('Protocol Error')
+                        rssi = 0
+                        iid = 'None'
 
                 else:
                     line = line[0]
