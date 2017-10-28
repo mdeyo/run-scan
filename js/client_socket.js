@@ -478,7 +478,8 @@ function setTagName(id, name) {
 }
 
 // connect socket to server
-var socket = io.connect('http://localhost:3000');
+//var socket = io.connect('http://localhost:3000');
+var socket = io.connect('192.168.42.1:8080');
 socket.on('connect', function() {
   clear_console();
   add_console_msg('green', 'Connected to the MultiMaster Server!');
