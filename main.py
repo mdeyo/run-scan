@@ -16,8 +16,8 @@ sample_id_flag = False
 
 @sio.on('connect')
 async def connect(sid, environ):
-    print("connect ", sid)
-    print('I have a client!!')
+    #print("connect ", sid)
+    print('Connected to a client!!')
     await sio.emit('hello', 'data')
 
 
@@ -59,7 +59,7 @@ async def client_request(sid, data):
 
 @sio.on('disconnect')
 def disconnect(sid):
-    print('disconnect ', sid)
+    print('Disconnected from client: ', sid)
 
 
 global_loop = asyncio.new_event_loop()
@@ -70,8 +70,8 @@ def startSocket():
     global sio
     global app
     
-    #web.run_app(app)
-    web.run_app(app, host='127.0.0.1', port=3000)
+    web.run_app(app)
+    #web.run_app(app, host='127.0.0.1', port=3000)
 
 
 def scan_and_send_next_id():
@@ -126,8 +126,8 @@ def pause_scan():
 
     if ser:
         cmd = b"\x89"
-        print(ser)
-        print(ser.flush())
+        #print(ser)
+        ser.flush()
         ser.write(cmd)
         paused = True
         print('** pausing **')
@@ -247,13 +247,16 @@ def read_loop():
 
                 else:
                     line = line[0]
-                    # print('line:' + line)
+                    #print('line:' + line)
+                    new_split = line.split(":")
+                    if(new_split[0]=="v"):
+                        print(line)
                 # printype(line))
                 # print('got here at ' + str(t))
                 # print('time:' + str(round(t - start_time, 2)))
 
                 if t - start_time > 5 and not paused:
-                    print('got here')
+                    #print('got here')
                     pause_scan()
                     paused = True
 
