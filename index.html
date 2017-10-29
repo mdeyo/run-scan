@@ -15,10 +15,13 @@
   <script src="lib/jquery-1.12.4/jquery-1.12.4.js"></script>
   <script src="lib/jquery-ui-1.12.1/jquery-ui.js"></script>
 
+  <!-- File Saver codes -->
+  <script src="lib/fileSaver/FileSaver.min.js"></script>
+
   <!-- Socket.io codes -->
   <script src="socket.io/socket.io.js"></script>
   <!-- UUID codes -->
-<!--   <script src="http://wzrd.in/standalone/uuid%2Fv1@latest"></script> -->
+  <!--   <script src="http://wzrd.in/standalone/uuid%2Fv1@latest"></script> -->
 
   <!-- <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script> -->
   <!-- <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script> -->
@@ -56,6 +59,11 @@
           <a href="#" onclick="updateTheme('dark')">Dark</a>
         </div>
       </div> -->
+
+      <button id="btn-save" type="submit" class="btn btn-primary" style="width: 80%;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 2px;">Save to file</button>
     </div>
   </div>
 
@@ -112,6 +120,13 @@
       <!-- <button id="submit_computer_fields" class="btn btn-default">Submit</button> -->
       <!-- </form> -->
     </div>
+
+    <label for="input-fileName">File name</label>
+    <input type="text" style="width: 50%;
+    padding: 2px;
+    font-size: 20px;
+    margin: auto;" class="form-control" id="input-fileName" value="textFile" placeholder="Enter file name">
+
 
 
   </div>

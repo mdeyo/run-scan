@@ -44,6 +44,8 @@ var saved_groups = {};
 
 var use_socket = true; //can be false when debugging
 
+var runners_places = {};
+
 /////////////////////////// Variables Section End /////////////////////////////
 
 ////////////////////// Debugging variables Section Start //////////////////////
@@ -195,7 +197,7 @@ var time_trial = {
   }
 }
 // TODO temporary for MIT XC time trial //
-saved_ids = time_trial;
+// saved_ids = time_trial;
 
 ////////////////////// Debugging variables Section End ////////////////////////
 
@@ -306,6 +308,14 @@ function counting_func() {
 
 function init() {
 
+  $("#btn-save").click(function() {
+    // var text = $("#textarea").val();
+    var filename = $("#input-fileName").val()
+    var blob = new Blob([JSON.stringify(runners_places, null, 2)], {type: 'application/json'});
+    //var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, filename + ".json");
+  });
+
   runner_count_text = document.getElementById('runner-count-text');
   reset_runner_count();
 
@@ -384,7 +394,9 @@ function update_clocks() {
 
   for (var id in saved_ids) {
     // if (saved_ids[id].active) {
-    saved_ids[id].timer_text.innerHTML = Math.floor((date - saved_ids[id].client_start_time) / 1000);
+    if (saved_ids[id].timer_text) {
+      saved_ids[id].timer_text.innerHTML = Math.floor((date - saved_ids[id].client_start_time) / 1000);
+    }
     // }
   }
 
@@ -527,20 +539,16 @@ function setTagName(id, name) {
   }
 }
 
-
-
 start_time = 0
 var main_start_time;
 
 var runner_count = 0;
 var runner_count_text;
 
-
 //////////////////////////////////////////////////////////
 /////////////////////
 ////////////////////////////////////////////////////////////
 ////////////////////
-
 
 function increment_runner_count() {
   runner_count += 1;
@@ -550,9 +558,8 @@ function increment_runner_count() {
 function reset_runner_count() {
   runner_count = 0;
   runner_count_text.innerHTML = runner_count;
+  runners_places = {};
 }
-
-
 
 /////////////////////////////
 /// Socket code section /////
@@ -571,7 +578,6 @@ if (use_socket) {
     clear_console();
     add_console_msg('red', 'Disconnected from the MultiMaster Server!');
   });
-
 
   socket.on('reply', function(data) {
     console.log('reply:' + data);
@@ -601,24 +607,43 @@ if (use_socket) {
   });
 
   socket.on('voltage', function(data) {
-    console.log('Battery status ' + data.toString()+' V');
+    console.log('Battery status ' + data.toString() + ' V');
   })
 
-  socket.on('result', function(data) {
-    console.log('result:' + data);
+  function handleResult(data) {
     var strings = data.split(':');
     var id = strings[0];
     var timestamp = parseFloat(strings[1]);
+    var place_str = (runner_count + 1).toString()
+    var msg = (runner_count + 1).toString() + ":" + id + ":" + timestamp;
 
-
+    //this is a saved runner
     if (id in saved_ids) {
       console.log('Name: ' + saved_ids[id].name + " timestamp: " + timestamp.toString());
       var lap_time = (timestamp - saved_ids[id].start_time);
       console.log('Lap time: ' + (lap_time).toString());
-      saved_ids[id].laps.push(lap_time);
+      if (saved_ids[id].laps) {
+        saved_ids[id].laps.push(lap_time);
+      } else {
+        saved_ids[id].laps = [lap_time];
+      }
       saved_ids[id].lap_count += 1;
-      increment_runner_count();
+      (runner_count + 1).toString();
+
+      msg = msg + ":" + saved_ids[id].name;
+      runners_places[place_str] =// not a saved runner - still log the data for race places
+      msg;
+
+    } else {
+      runners_places[place_str] = msg;
     }
+    // for both cases, need to increment total count
+    increment_runner_count();
+  }
+
+  socket.on('result', function(data) {
+    console.log('result:' + data);
+    handleResult(data);
   });
 
   // listen to update event raised by the server
@@ -689,18 +714,18 @@ function request_time_id(id) {
 }
 
 function request_group_time(group_name) {
-  if (saved_groups[group_name].active){
+  if (saved_groups[group_name].active) {
     console.log('TODO feature to stop group timer');
     saved_groups[group_name].active = false;
     saved_groups[group_name].timer_buttion.innerHTML = "Start Timing"
-  }else{
+  } else {
     start_group_time(group_name);
     saved_groups[group_name].active = true;
     saved_groups[group_name].timer_buttion.innerHTML = "Stop Timing"
   }
 }
 
-function start_group_time(group_name){
+function start_group_time(group_name) {
   requesting_group_time_flag = true;
   requesting_group_time_id = group_name;
   if (check_socket("cannot request group timestamp")) {
@@ -725,7 +750,6 @@ function update_group_athlete_timers(group_name) {
     saved_ids[athlete_id].start_time = new_hardware_start;
   }
 }
-
 
 // Not used yet - idea was for 'Add Tag' button to open an interface that prompts athlete name first
 function name_for_next_scan_for_id(name) {
