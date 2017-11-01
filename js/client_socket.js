@@ -53,476 +53,374 @@ var runners_places = {};
 // override socket while debugging without the full system
 // use_socket = false;
 
+// need one global start for everyone
+// and then each relay has an offset time - not sure which runner will start first
 
 // TODO temporary for MIT XC wilderness loop relays //
-var wilderness_relays = {
+var wilderness_relays_ids = {
   "E2006008131900251120A320": {
     "name": "Dennis",
-    "teammate_name":"Aidan",
+    "teammate_name": "Aidan",
     "created_at": "8:41:51 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_1",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900261120A324",
+    "team_delay": 91
   },
   "E2006008131900261120A324": {
     "name": "Aidan",
-    "teammate_name":"Dennis",
+    "teammate_name": "Dennis",
     "created_at": "8:46:01 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_2",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900251120A320",
+    "team_delay": 91
   },
   "E2006008131900731120A3E0": {
     "name": "Billy",
-    "teammate_name":"Josh",
+    "teammate_name": "Josh",
     "created_at": "8:47:29 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_3",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900491120A380",
+    "team_delay": 56
   },
   "E2006008131900491120A380": {
     "name": "Josh",
-    "teammate_name":"Billy",
+    "teammate_name": "Billy",
     "created_at": "8:49:02 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_4",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900731120A3E0",
+    "team_delay": 56
   },
   "E2006008131900591120A3A8": {
     "name": "Nicholas",
-    "teammate_name":"Brian",
+    "teammate_name": "Brian",
     "created_at": "8:50:23 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_5",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null,
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900751120A3E8",
+    "team_delay": 35
   },
   "E2006008131900751120A3E8": {
     "name": "Brian",
-    "teammate_name":"Nicholas",
+    "teammate_name": "Nicholas",
     "created_at": "8:50:42 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_6",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null,
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900591120A3A8",
+    "team_delay": 35
   },
   "E2006008131900201110A30B": {
     "name": "Knapp",
-    "teammate_name":"Knoedler",
+    "teammate_name": "Knoedler",
     "created_at": "8:51:08 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_7",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900451110A36F",
+    "team_delay": 14
   },
   "E2006008131900451110A36F": {
     "name": "Knoedler",
-    "teammate_name":"Knapp",
+    "teammate_name": "Knapp",
     "created_at": "8:51:20 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_8",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900201110A30B",
+    "team_delay": 14
   },
   "E2006008131900211110A30F": {
     "name": "David",
-    "teammate_name":"Finn",
+    "teammate_name": "Finn",
     "created_at": "8:51:38 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_9",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900351120A348",
+    "team_delay": 0
   },
   "E2006008131900351120A348": {
     "name": "Finn",
-    "teammate_name":"David",
+    "teammate_name": "David",
     "created_at": "8:51:57 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_10",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900211110A30F",
+    "team_delay": 0
   },
   "E2006008131900401040ABBC": {
     "name": "Bacher",
-    "teammate_name":"Marissa",
+    "teammate_name": "Marissa",
     "created_at": "8:57:11 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_11",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900781040AC54",
+    "team_delay": 195
   },
   "E2006008131900781040AC54": {
     "name": "Marissa",
-    "teammate_name":"Bacher",
+    "teammate_name": "Bacher",
     "created_at": "9:00:04 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_12",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900401040ABBC",
+    "team_delay": 195
   },
   "E2006008131900551040ABF8": {
     "name": "Leandra",
-    "teammate_name":"Mary",
+    "teammate_name": "Mary",
     "created_at": "9:05:57 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_13",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null,
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900201030AB6B",
+    "team_delay": 175
   },
   "E2006008131900201030AB6B": {
     "name": "Mary",
-    "teammate_name":"Leandra",
+    "teammate_name": "Leandra",
     "created_at": "9:06:27 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_14",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null,
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900551040ABF8",
+    "team_delay": 175
   },
   "E2006008131900791040AC58": {
     "name": "Collins",
-    "teammate_name":"Tessa",
+    "teammate_name": "Tessa",
     "created_at": "9:10:28 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_15",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900291040AB90",
+    "team_delay": 130
   },
   "E2006008131900291040AB90": {
     "name": "Tessa",
-    "teammate_name":"Collins",
+    "teammate_name": "Collins",
     "created_at": "9:11:35 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_16",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900791040AC58",
+    "team_delay": 130
   },
   "E2006008131900311040AB98": {
     "name": "Megan",
-    "teammate_name":"Emily",
+    "teammate_name": "Emily",
     "created_at": "9:11:48 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_17",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null,
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131901041040ACBC",
+    "team_delay": 105
   },
   "E2006008131901041040ACBC": {
     "name": "Emily",
-    "teammate_name":"Megan",
+    "teammate_name": "Megan",
     "created_at": "9:14:15 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_18",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900311040AB98",
+    "team_delay": 105
   },
   "E2006008131900191030AB67": {
     "name": "Jenna",
-    "teammate_name":"Williams",
+    "teammate_name": "Williams",
     "created_at": "9:14:32 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_19",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null,
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900771040AC50",
+    "team_delay": 90
   },
   "E2006008131900771040AC50": {
     "name": "Williams",
-    "teammate_name":"Jenna",
+    "teammate_name": "Jenna",
     "created_at": "9:14:44 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_20",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null,
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900191030AB67",
+    "team_delay": 90
   },
   "E2006008131900801040AC5C": {
     "name": "Jenny",
-    "teammate_name":"Dhaman",
+    "teammate_name": "Dhaman",
     "created_at": "9:16:36 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_21",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900531040ABF0",
+    "team_delay": 60
   },
   "E2006008131900531040ABF0": {
     "name": "Dhaman",
-    "teammate_name":"Jenny",
+    "teammate_name": "Jenny",
     "created_at": "9:16:52 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_22",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900801040AC5C",
+    "team_delay": 60
   },
   "E2006008131900641040AC1C": {
     "name": "Darby",
-    "teammate_name":"Ciera",
+    "teammate_name": "Ciera",
     "created_at": "9:17:05 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_23",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null
-    ],
-    "lap_count": null
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900281040AB8C",
+    "team_delay": 0
   },
   "E2006008131900281040AB8C": {
     "name": "Ciera",
-    "teammate_name":"Darby",
+    "teammate_name": "Darby",
     "created_at": "9:17:19 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_24",
     "start_button": {},
-    "timer_text": {},
-    "laps": [
-      null,
-      null
-    ],
-    "lap_count": null
-  }
-}
-
-// TODO temporary for MIT XC time trial //
-var time_trial = {
-  "E20060081309009420803DC2": {
-    "name": "1",
-    "created_at": "10:05:00 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E20060081309009419404A38": {
-    "name": "2",
-    "created_at": "10:08:42 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E2006008130900941350895F": {
-    "name": "3",
-    "created_at": "10:08:51 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E2006008130900942000460B": {
-    "name": "4",
-    "created_at": "10:08:58 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E2006008130900941450809B": {
-    "name": "5",
-    "created_at": "10:09:05 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E2005186010701841040ACE4": {
-    "name": "6",
-    "created_at": "10:09:34 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E20060081309009417006427": {
-    "name": "7",
-    "created_at": "10:10:04 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E2006008130900941600714B": {
-    "name": "8",
-    "created_at": "10:10:12 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E20060081309009417605FCA": {
-    "name": "9",
-    "created_at": "10:10:25 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E20060081309009416906653": {
-    "name": "10",
-    "created_at": "10:10:38 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E20060081309009415906F1F": {
-    "name": "11",
-    "created_at": "10:11:54 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E200600813090094183054ED": {
-    "name": "12",
-    "created_at": "10:12:01 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E20060081309009418405702": {
-    "name": "13",
-    "created_at": "10:12:10 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E20060081309009419304C5C": {
-    "name": "14",
-    "created_at": "10:12:17 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E200600813090094199043F7": {
-    "name": "15",
-    "created_at": "10:12:23 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E200600813090094217033CB": {
-    "name": "16",
-    "created_at": "10:12:30 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E20060081309009420703BCD": {
-    "name": "17",
-    "created_at": "10:12:36 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E20060081309009422402E09": {
-    "name": "18",
-    "created_at": "10:12:43 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E200600813090094218031D7": {
-    "name": "19",
-    "created_at": "10:12:49 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
-  },
-  "E20060081309009422302C2D": {
-    "name": "20",
-    "created_at": "10:12:57 PM-8/24/2017",
-    "name_text": {},
-    "start_button": {},
-    "timer_text": {}
+    "timer_text": {
+      "innerHTML": null
+    },
+    "laps": [],
+    "lap_count": 0,
+    "teammate_id": "E2006008131900641040AC1C",
+    "team_delay": 0
   }
 }
 // TODO temporary for MIT XC wilderness loop relays //
-saved_ids = wilderness_relays;
+saved_ids = wilderness_relays_ids;
 
 ////////////////////// Debugging variables Section End ////////////////////////
 
@@ -631,14 +529,20 @@ function counting_func() {
   console.log(total_t);
 }
 
+var xc_race = false;
+var wilderness_relay = true;
+
 function init() {
 
   $("#btn-save").click(function() {
     // var text = $("#textarea").val();
     var filename = $("#input-fileName").val()
+
     var blob = new Blob([JSON.stringify(runners_places, null, 2)], {type: 'application/json'});
-    //var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, filename + ".json");
+    saveAs(blob, filename + "-places.json");
+
+    var blob2 = new Blob([JSON.stringify(saved_ids, null, 2)], {type: 'application/json'});
+    saveAs(blob2, filename + "-saved_ids.json");
   });
 
   runner_count_text = document.getElementById('runner-count-text');
@@ -683,7 +587,6 @@ function init() {
         // document.getElementById("fileContents").innerHTML = "error reading file";
       }
     }
-
   }, false);
 }
 
@@ -715,7 +618,7 @@ function convert_to_minutes(seconds) {
 
 function update_clocks() {
   var date = new Date;
-  // main_timer_text.innerHTML = convert_to_minutes(Math.floor((date - main_start_time) / 1000));
+  main_timer_text.innerHTML = convert_to_minutes(Math.floor((date - main_start_time) / 1000));
 
   for (var id in saved_ids) {
     // if (saved_ids[id].active) {
@@ -907,13 +810,16 @@ if (use_socket) {
   socket.on('reply', function(data) {
     console.log('reply:' + data);
     start_time = parseFloat(data);
+    saved_ids['global_start'] = start_time;
     main_start_time = new Date;
 
+    // start/reset timer for individual athlete
     if (requesting_time_flag) {
       requesting_time_flag = false;
       saved_ids[requesting_time_id].start_time = start_time;
     }
 
+    // start/reset timer for a group
     if (requesting_group_time_flag) {
       requesting_group_time_flag = false;
       saved_groups[requesting_group_time_id].start_time = start_time;
@@ -933,39 +839,61 @@ if (use_socket) {
 
   socket.on('voltage', function(data) {
     console.log('Battery status ' + data.toString() + ' V');
-  })
+  });
 
   function handleResult(data) {
     var strings = data.split(':');
     var id = strings[0];
-    var athlete_name = saved_ids[id].name;
     var timestamp = parseFloat(strings[1]);
     var place_str = (runner_count + 1).toString()
     var msg = (runner_count + 1).toString() + ":" + id + ":" + timestamp;
 
     //this is a saved runner
     if (id in saved_ids) {
-      add_console_msg('orange', 'Registered '+athlete_name);
+      var athlete_data = saved_ids[id];
+      var athlete_name = athlete_data.name;
+      var lap_time;
+
+      if (wilderness_relay) {
+        var teammate_data = saved_ids[athlete_data.teammate_id];
+        saved_ids[id].last_time = timestamp;
+
+        if (teammate_data.last_time) {
+          lap_time = timestamp - teammate_data.last_time;
+        } else {
+          lap_time = timestamp - start_time - athlete_data.team_delay;
+        }
+        add_console_msg('orange', athlete_name + " - " + convert_to_minutes(lap_time));
+      } else if (xc_race) {
+        msg = msg + ":" + athlete_name;
+        runners_places[place_str] = // not a saved runner - still log the data for race places
+      } else {
+        add_console_msg('orange', 'Registered ' + athlete_name);
+        var lap_time = (timestamp - athlete_data.start_time);
+      }
 
       console.log('Name: ' + athlete_name + " timestamp: " + timestamp.toString());
-      var lap_time = (timestamp - saved_ids[id].start_time);
-
-
       console.log('Lap time: ' + (lap_time).toString());
+
       if (saved_ids[id].laps) {
         saved_ids[id].laps.push(lap_time);
       } else {
         saved_ids[id].laps = [lap_time];
       }
+
+      if (saved_ids[id].global_splits) {
+        saved_ids[id].global_splits.push(timestamp);
+      } else {
+        saved_ids[id].global_splits = [timestamp];
+      }
+
       saved_ids[id].lap_count += 1;
       (runner_count + 1).toString();
 
-      msg = msg + ":" + athlete_name;
-      runners_places[place_str] =// not a saved runner - still log the data for race places
-      msg;
-
     } else {
-      runners_places[place_str] = msg;
+      if (xc_race) {
+        runners_places[place_str] = msg;
+      }
     }
     // for both cases, need to increment total count
     increment_runner_count();
