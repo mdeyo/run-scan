@@ -862,9 +862,9 @@ if (use_socket) {
         var teammate_data = saved_ids[athlete_data.teammate_id];
 
         if (athlete_data.last_time) {
-          time_since_last = timestamp = athlete_data.last_time;
+          time_since_last = timestamp - athlete_data.last_time;
         } else {
-          time_since_last = wilderness_min_time + 1;
+          time_since_last = 2*wilderness_min_time + 1;
         }
 
         if (teammate_data.last_time) {
@@ -872,7 +872,7 @@ if (use_socket) {
         } else {
           lap_time = timestamp - start_time - athlete_data.team_delay;
         }
-        if (lap_time > wilderness_min_time && time_since_last > wilderness_min_time) {
+        if (lap_time > wilderness_min_time && time_since_last > 2*wilderness_min_time) {
           add_console_msg('orange', athlete_name + " - " + convert_to_minutes(lap_time));
           saved_ids[id].last_time = timestamp;
 
@@ -883,7 +883,7 @@ if (use_socket) {
           }
           saved_ids[id].lap_count += 1;
         }
-        
+
       } else if (xc_race) {
         msg = msg + ":" + athlete_name;
         runners_places[place_str] = msg;
