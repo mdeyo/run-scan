@@ -26,17 +26,20 @@ function add_console_msg(type, msg) {
   var msg_class = 'alert',
     msg_title = ' ';
   console.log(type);
+  style="";
   if (type == 'green') {
     msg_class = "alert success";
     msg_title = 'Success!';
   }
   else if (type == 'orange') {
     msg_class = "alert warning";
+    style = "font-weight: bold;
+    font-size: 22px;";
   }
   else if (type == 'red') {
     msg_class = "alert";
   }
-  $('#console-div').prepend("<div class=\"" + msg_class + "\">" + " <span class=\"closebtn\">\&times</span><div id=\"console-timestamp\">"+getLocalTimestamp()+"</div> <strong>" + msg_title + "</strong > " + msg + "  </div>");
+  $('#console-div').prepend("<div style=\""+style+"\" class=\"" + msg_class + "\">" + " <span class=\"closebtn\">\&times</span><div id=\"console-timestamp\">"+getLocalTimestamp()+"</div> <strong>" + msg_title + "</strong > " + msg + "  </div>");
   update_console_close_buttons();
 }
 

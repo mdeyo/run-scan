@@ -803,11 +803,11 @@ if (use_socket) {
   var socket = io.connect('192.168.42.1:8080');
   socket.on('connect', function() {
     clear_console();
-    add_console_msg('green', 'Connected to the MultiMaster Server!');
+    add_console_msg('green', 'Connected to the Antenna Server!');
   });
   socket.on('disconnect', function() {
     clear_console();
-    add_console_msg('red', 'Disconnected from the MultiMaster Server!');
+    add_console_msg('red', 'Disconnected from the Antenna Server!');
   });
 
   socket.on('reply', function(data) {
@@ -859,7 +859,6 @@ if (use_socket) {
 
       if (wilderness_relay) {
         var teammate_data = saved_ids[athlete_data.teammate_id];
-        saved_ids[id].last_time = timestamp;
 
         if (teammate_data.last_time) {
           lap_time = timestamp - teammate_data.last_time;
@@ -868,6 +867,7 @@ if (use_socket) {
         }
         if (lap_time > wilderness_min_time){
         add_console_msg('orange', athlete_name + " - " + convert_to_minutes(lap_time));
+        saved_ids[id].last_time = timestamp;
       }
       } else if (xc_race) {
         msg = msg + ":" + athlete_name;
