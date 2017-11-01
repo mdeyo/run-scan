@@ -110,7 +110,7 @@
 }
 
 .alert.warning {
-  background-color: #ff9800;
+  background-color: #ffdf35;
 }
 
 .closebtn {
@@ -190,6 +190,7 @@ hr.thick_line {
 
 .half-page {
   width: 50%;
+  height: calc(100% - 80px);
 }
 
 .section-block {
@@ -290,12 +291,18 @@ img.resize {
   padding-bottom: 10px;
 }*/
 
+#console-div {
+  height: calc(100% - 40px);
+  overflow-y: scroll;
+}
+
 .console_block {
   text-align: center;
   /*height: 400px;*/
   background-color: #ffdf35;
   border-style: solid;
   min-height: 79px;
+  height: calc(100% - 140px);
 }
 
 .console_block h5 {

@@ -58,6 +58,7 @@ var runners_places = {};
 var wilderness_relays = {
   "E2006008131900251120A320": {
     "name": "Dennis",
+    "teammate_name":"Aidan",
     "created_at": "8:41:51 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_1",
@@ -70,6 +71,7 @@ var wilderness_relays = {
   },
   "E2006008131900261120A324": {
     "name": "Aidan",
+    "teammate_name":"Dennis",
     "created_at": "8:46:01 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_2",
@@ -82,6 +84,7 @@ var wilderness_relays = {
   },
   "E2006008131900731120A3E0": {
     "name": "Billy",
+    "teammate_name":"Josh",
     "created_at": "8:47:29 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_3",
@@ -94,6 +97,7 @@ var wilderness_relays = {
   },
   "E2006008131900491120A380": {
     "name": "Josh",
+    "teammate_name":"Billy",
     "created_at": "8:49:02 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_4",
@@ -106,6 +110,7 @@ var wilderness_relays = {
   },
   "E2006008131900591120A3A8": {
     "name": "Nicholas",
+    "teammate_name":"Brian",
     "created_at": "8:50:23 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_5",
@@ -119,6 +124,7 @@ var wilderness_relays = {
   },
   "E2006008131900751120A3E8": {
     "name": "Brian",
+    "teammate_name":"Nicholas",
     "created_at": "8:50:42 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_6",
@@ -132,6 +138,7 @@ var wilderness_relays = {
   },
   "E2006008131900201110A30B": {
     "name": "Knapp",
+    "teammate_name":"Knoedler",
     "created_at": "8:51:08 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_7",
@@ -144,6 +151,7 @@ var wilderness_relays = {
   },
   "E2006008131900451110A36F": {
     "name": "Knoedler",
+    "teammate_name":"Knapp",
     "created_at": "8:51:20 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_8",
@@ -156,6 +164,7 @@ var wilderness_relays = {
   },
   "E2006008131900211110A30F": {
     "name": "David",
+    "teammate_name":"Finn",
     "created_at": "8:51:38 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_9",
@@ -168,6 +177,7 @@ var wilderness_relays = {
   },
   "E2006008131900351120A348": {
     "name": "Finn",
+    "teammate_name":"David",
     "created_at": "8:51:57 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_10",
@@ -180,6 +190,7 @@ var wilderness_relays = {
   },
   "E2006008131900401040ABBC": {
     "name": "Bacher",
+    "teammate_name":"Marissa",
     "created_at": "8:57:11 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_11",
@@ -192,6 +203,7 @@ var wilderness_relays = {
   },
   "E2006008131900781040AC54": {
     "name": "Marissa",
+    "teammate_name":"Bacher",
     "created_at": "9:00:04 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_12",
@@ -204,6 +216,7 @@ var wilderness_relays = {
   },
   "E2006008131900551040ABF8": {
     "name": "Leandra",
+    "teammate_name":"Mary",
     "created_at": "9:05:57 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_13",
@@ -217,6 +230,7 @@ var wilderness_relays = {
   },
   "E2006008131900201030AB6B": {
     "name": "Mary",
+    "teammate_name":"Leandra",
     "created_at": "9:06:27 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_14",
@@ -230,6 +244,7 @@ var wilderness_relays = {
   },
   "E2006008131900791040AC58": {
     "name": "Collins",
+    "teammate_name":"Tessa",
     "created_at": "9:10:28 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_15",
@@ -242,6 +257,7 @@ var wilderness_relays = {
   },
   "E2006008131900291040AB90": {
     "name": "Tessa",
+    "teammate_name":"Collins",
     "created_at": "9:11:35 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_16",
@@ -254,6 +270,7 @@ var wilderness_relays = {
   },
   "E2006008131900311040AB98": {
     "name": "Megan",
+    "teammate_name":"Emily",
     "created_at": "9:11:48 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_17",
@@ -267,6 +284,7 @@ var wilderness_relays = {
   },
   "E2006008131901041040ACBC": {
     "name": "Emily",
+    "teammate_name":"Megan",
     "created_at": "9:14:15 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_18",
@@ -279,6 +297,7 @@ var wilderness_relays = {
   },
   "E2006008131900191030AB67": {
     "name": "Jenna",
+    "teammate_name":"Williams",
     "created_at": "9:14:32 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_19",
@@ -292,6 +311,7 @@ var wilderness_relays = {
   },
   "E2006008131900771040AC50": {
     "name": "Williams",
+    "teammate_name":"Jenna",
     "created_at": "9:14:44 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_20",
@@ -305,6 +325,7 @@ var wilderness_relays = {
   },
   "E2006008131900801040AC5C": {
     "name": "Jenny",
+    "teammate_name":"Dhaman",
     "created_at": "9:16:36 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_21",
@@ -317,6 +338,7 @@ var wilderness_relays = {
   },
   "E2006008131900531040ABF0": {
     "name": "Dhaman",
+    "teammate_name":"Jenny",
     "created_at": "9:16:52 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_22",
@@ -329,6 +351,7 @@ var wilderness_relays = {
   },
   "E2006008131900641040AC1C": {
     "name": "Darby",
+    "teammate_name":"Ciera",
     "created_at": "9:17:05 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_23",
@@ -341,6 +364,7 @@ var wilderness_relays = {
   },
   "E2006008131900281040AB8C": {
     "name": "Ciera",
+    "teammate_name":"Darby",
     "created_at": "9:17:19 PM-10/31/2017",
     "name_text": {},
     "group_select_id": "group_select_24",
@@ -925,6 +949,8 @@ if (use_socket) {
 
       console.log('Name: ' + athlete_name + " timestamp: " + timestamp.toString());
       var lap_time = (timestamp - saved_ids[id].start_time);
+
+
       console.log('Lap time: ' + (lap_time).toString());
       if (saved_ids[id].laps) {
         saved_ids[id].laps.push(lap_time);
