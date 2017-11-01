@@ -609,9 +609,9 @@ function convert_to_minutes(seconds) {
     var min = Math.floor(seconds / 60);
     var sec = seconds % 60;
     if (sec > 9) {
-      sec = sec.toString().slice(0,4);
+      sec = sec.toString().slice(0, 4);
     } else {
-      sec = "0" + sec.toString().slice(0,3);
+      sec = "0" + sec.toString().slice(0, 3);
     }
     return min.toString() + ':' + sec;
   } else {
@@ -855,20 +855,35 @@ if (use_socket) {
     if (id in saved_ids) {
       var athlete_data = saved_ids[id];
       var athlete_name = athlete_data.name;
-      var lap_time;
+      var lap_time,
+        time_since_last;
 
       if (wilderness_relay) {
         var teammate_data = saved_ids[athlete_data.teammate_id];
+
+        if (athlete_data.last_time) {
+          time_since_last = timestamp = athlete_data.last_time;
+        } else {
+          time_since_last = wilderness_min_time + 1;
+        }
 
         if (teammate_data.last_time) {
           lap_time = timestamp - teammate_data.last_time;
         } else {
           lap_time = timestamp - start_time - athlete_data.team_delay;
         }
-        if (lap_time > wilderness_min_time){
-        add_console_msg('orange', athlete_name + " - " + convert_to_minutes(lap_time));
-        saved_ids[id].last_time = timestamp;
-      }
+        if (lap_time > wilderness_min_time && time_since_last > wilderness_min_time) {
+          add_console_msg('orange', athlete_name + " - " + convert_to_minutes(lap_time));
+          saved_ids[id].last_time = timestamp;
+
+          if (saved_ids[id].laps) {
+            saved_ids[id].laps.push(lap_time);
+          } else {
+            saved_ids[id].laps = [lap_time];
+          }
+          saved_ids[id].lap_count += 1;
+        }
+        
       } else if (xc_race) {
         msg = msg + ":" + athlete_name;
         runners_places[place_str] = msg;
@@ -880,20 +895,11 @@ if (use_socket) {
       console.log('Name: ' + athlete_name + " timestamp: " + timestamp.toString());
       console.log('Lap time: ' + (lap_time).toString());
 
-      if (saved_ids[id].laps) {
-        saved_ids[id].laps.push(lap_time);
-      } else {
-        saved_ids[id].laps = [lap_time];
-      }
-
       if (saved_ids[id].global_splits) {
         saved_ids[id].global_splits.push(timestamp);
       } else {
         saved_ids[id].global_splits = [timestamp];
       }
-
-      saved_ids[id].lap_count += 1;
-      (runner_count + 1).toString();
 
     } else {
       if (xc_race) {
