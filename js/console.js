@@ -33,8 +33,7 @@ function add_console_msg(type, msg) {
   }
   else if (type == 'orange') {
     msg_class = "alert warning";
-    style = "font-weight: bold;
-    font-size: 22px;";
+    style = "font-weight: bold; font-size: 22px;";
   }
   else if (type == 'red') {
     msg_class = "alert";

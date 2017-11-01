@@ -101,8 +101,8 @@ start_time = round(time.time(), 2)
 paused = False
 resumed = False
 
-time_to_recycle = 2.5
-min_lap_time = 30
+time_to_recycle = 1.1
+min_lap_time = 20
 list_to_delete = []
 
 
