@@ -866,7 +866,7 @@ if (use_socket) {
         add_console_msg('orange', athlete_name + " - " + convert_to_minutes(lap_time));
       } else if (xc_race) {
         msg = msg + ":" + athlete_name;
-        runners_places[place_str] = // not a saved runner - still log the data for race places
+        runners_places[place_str] = msg;
       } else {
         add_console_msg('orange', 'Registered ' + athlete_name);
         var lap_time = (timestamp - athlete_data.start_time);
@@ -892,7 +892,7 @@ if (use_socket) {
 
     } else {
       if (xc_race) {
-        runners_places[place_str] = msg;
+        runners_places[place_str] = msg; // not a saved runner - still log the data for race places
       }
     }
     // for both cases, need to increment total count
