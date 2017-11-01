@@ -38,7 +38,10 @@ function add_console_msg(type, msg) {
   else if (type == 'red') {
     msg_class = "alert";
   }
-  $('#console-div').prepend("<div style=\""+style+"\" class=\"" + msg_class + "\">" + " <span class=\"closebtn\">\&times</span><div id=\"console-timestamp\">"+getLocalTimestamp()+"</div> <strong>" + msg_title + "</strong > " + msg + "  </div>");
+  // $('#console-div').prepend("<div style=\""+style+"\" class=\"" + msg_class + "\">" + " <span class=\"closebtn\">\&times</span><div id=\"console-timestamp\">"+getLocalTimestamp()+"</div> <strong>" + msg_title + "</strong > " + msg + "  </div>");
+
+  $('#console-div').prepend("<div style=\""+style+"\" class=\"" + msg_class + "\">" + " <span class=\"closebtn\">\&times</span><strong>" + msg_title + "</strong > " + msg + "  </div>");
+
   update_console_close_buttons();
 }
 
