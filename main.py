@@ -101,7 +101,7 @@ start_time = round(time.time(), 2)
 paused = False
 resumed = False
 
-time_to_recycle = 4
+time_to_recycle = 2.5
 min_lap_time = 30
 list_to_delete = []
 
@@ -226,11 +226,11 @@ def read_loop():
 
                         if iid not in last_time_stamp:
                             last_time_stamp[iid] = 0 - min_lap_time
-                        
+
                         if t - last_time_stamp[iid] < min_lap_time:
                             print('not greater than min lap time!')
-                            #print(t)
-                            #print(last_time_stamp[iid])
+                            # print(t)
+                            # print(last_time_stamp[iid])
                             #print(t - last_time_stamp[iid])
                         else:
                             if iid in saved:
@@ -240,8 +240,8 @@ def read_loop():
                             else:
                                 saved[iid] = [str(rssi) + ':' + str(timestamp)]
                             currently_scanning[iid] = t
-                            #print(saved)
-                            #print(currently_scanning)
+                            # print(saved)
+                            # print(currently_scanning)
 
                     except (ValueError, IndexError):
                         print('Protocol Error')

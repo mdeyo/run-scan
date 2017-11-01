@@ -53,6 +53,307 @@ var runners_places = {};
 // override socket while debugging without the full system
 // use_socket = false;
 
+
+// TODO temporary for MIT XC wilderness loop relays //
+var wilderness_relays = {
+  "E2006008131900251120A320": {
+    "name": "Dennis",
+    "created_at": "8:41:51 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_1",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900261120A324": {
+    "name": "Aidan",
+    "created_at": "8:46:01 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_2",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900731120A3E0": {
+    "name": "Billy",
+    "created_at": "8:47:29 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_3",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900491120A380": {
+    "name": "Josh",
+    "created_at": "8:49:02 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_4",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900591120A3A8": {
+    "name": "Nicholas",
+    "created_at": "8:50:23 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_5",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null,
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900751120A3E8": {
+    "name": "Brian",
+    "created_at": "8:50:42 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_6",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null,
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900201110A30B": {
+    "name": "Knapp",
+    "created_at": "8:51:08 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_7",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900451110A36F": {
+    "name": "Knoedler",
+    "created_at": "8:51:20 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_8",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900211110A30F": {
+    "name": "David",
+    "created_at": "8:51:38 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_9",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900351120A348": {
+    "name": "Finn",
+    "created_at": "8:51:57 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_10",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900401040ABBC": {
+    "name": "Bacher",
+    "created_at": "8:57:11 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_11",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900781040AC54": {
+    "name": "Marissa",
+    "created_at": "9:00:04 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_12",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900551040ABF8": {
+    "name": "Leandra",
+    "created_at": "9:05:57 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_13",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null,
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900201030AB6B": {
+    "name": "Mary",
+    "created_at": "9:06:27 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_14",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null,
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900791040AC58": {
+    "name": "Collins",
+    "created_at": "9:10:28 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_15",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900291040AB90": {
+    "name": "Tessa",
+    "created_at": "9:11:35 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_16",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900311040AB98": {
+    "name": "Megan",
+    "created_at": "9:11:48 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_17",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null,
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131901041040ACBC": {
+    "name": "Emily",
+    "created_at": "9:14:15 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_18",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900191030AB67": {
+    "name": "Jenna",
+    "created_at": "9:14:32 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_19",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null,
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900771040AC50": {
+    "name": "Williams",
+    "created_at": "9:14:44 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_20",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null,
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900801040AC5C": {
+    "name": "Jenny",
+    "created_at": "9:16:36 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_21",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900531040ABF0": {
+    "name": "Dhaman",
+    "created_at": "9:16:52 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_22",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900641040AC1C": {
+    "name": "Darby",
+    "created_at": "9:17:05 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_23",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null
+    ],
+    "lap_count": null
+  },
+  "E2006008131900281040AB8C": {
+    "name": "Ciera",
+    "created_at": "9:17:19 PM-10/31/2017",
+    "name_text": {},
+    "group_select_id": "group_select_24",
+    "start_button": {},
+    "timer_text": {},
+    "laps": [
+      null,
+      null
+    ],
+    "lap_count": null
+  }
+}
+
 // TODO temporary for MIT XC time trial //
 var time_trial = {
   "E20060081309009420803DC2": {
@@ -196,8 +497,8 @@ var time_trial = {
     "timer_text": {}
   }
 }
-// TODO temporary for MIT XC time trial //
-// saved_ids = time_trial;
+// TODO temporary for MIT XC wilderness loop relays //
+saved_ids = wilderness_relays;
 
 ////////////////////// Debugging variables Section End ////////////////////////
 
@@ -613,13 +914,16 @@ if (use_socket) {
   function handleResult(data) {
     var strings = data.split(':');
     var id = strings[0];
+    var athlete_name = saved_ids[id].name;
     var timestamp = parseFloat(strings[1]);
     var place_str = (runner_count + 1).toString()
     var msg = (runner_count + 1).toString() + ":" + id + ":" + timestamp;
 
     //this is a saved runner
     if (id in saved_ids) {
-      console.log('Name: ' + saved_ids[id].name + " timestamp: " + timestamp.toString());
+      add_console_msg('orange', 'Registered '+athlete_name);
+
+      console.log('Name: ' + athlete_name + " timestamp: " + timestamp.toString());
       var lap_time = (timestamp - saved_ids[id].start_time);
       console.log('Lap time: ' + (lap_time).toString());
       if (saved_ids[id].laps) {
@@ -630,7 +934,7 @@ if (use_socket) {
       saved_ids[id].lap_count += 1;
       (runner_count + 1).toString();
 
-      msg = msg + ":" + saved_ids[id].name;
+      msg = msg + ":" + athlete_name;
       runners_places[place_str] =// not a saved runner - still log the data for race places
       msg;
 
