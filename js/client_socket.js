@@ -57,6 +57,9 @@ var runners_places = {};
 // and then each relay has an offset time - not sure which runner will start first
 
 // TODO temporary for MIT XC wilderness loop relays //
+
+var wilderness_min_time = 110;
+
 var wilderness_relays_ids = {
   "E2006008131900251120A320": {
     "name": "Dennis",
@@ -550,7 +553,7 @@ function init() {
 
   resetLaps();
 
-  // main_timer_text = document.getElementById('timer-text');
+  main_timer_text = document.getElementById('timer-text');
   athlete_timers = document.getElementById('athlete_timers');
   // setInterval(counting_func, 1000);
   var start = new Date;
@@ -606,9 +609,9 @@ function convert_to_minutes(seconds) {
     var min = Math.floor(seconds / 60);
     var sec = seconds % 60;
     if (sec > 9) {
-      sec = sec.toString();
+      sec = sec.toString().slice(0,4);
     } else {
-      sec = "0" + sec.toString();
+      sec = "0" + sec.toString().slice(0,3);
     }
     return min.toString() + ':' + sec;
   } else {
@@ -863,7 +866,9 @@ if (use_socket) {
         } else {
           lap_time = timestamp - start_time - athlete_data.team_delay;
         }
+        if (lap_time > wilderness_min_time){
         add_console_msg('orange', athlete_name + " - " + convert_to_minutes(lap_time));
+      }
       } else if (xc_race) {
         msg = msg + ":" + athlete_name;
         runners_places[place_str] = msg;
