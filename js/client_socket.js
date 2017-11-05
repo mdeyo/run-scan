@@ -621,7 +621,10 @@ function convert_to_minutes(seconds) {
 
 function update_clocks() {
   var date = new Date;
+
+  if (main_timer_active){
   main_timer_text.innerHTML = convert_to_minutes(Math.floor((date - main_start_time) / 1000));
+}
 
   for (var id in saved_ids) {
     // if (saved_ids[id].active) {
@@ -964,10 +967,17 @@ function stop_scan() {
   }
 }
 
+var main_timer_active = false;
+
 function request_time() {
+  main_timer_active = true;
   if (check_socket("cannot request timestamp")) {
     socket.emit('request', 'timestamp');
   }
+}
+
+function stop_timer(){
+  main_timer_active = false;
 }
 
 // Called by each athlete start timer button, sets flag to true and updates the

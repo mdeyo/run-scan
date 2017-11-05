@@ -1,5 +1,10 @@
 /*Console message styling*/
 
+body {
+  /*attempt to remove sroll-down-auto-refresh in mobile*/
+  overflow-y: hidden;
+}
+
 .group_name {
   line-height: 36px;
   font-size: 25px;
