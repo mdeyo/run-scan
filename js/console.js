@@ -38,6 +38,11 @@ function add_console_msg(type, msg) {
   else if (type == 'red') {
     msg_class = "alert";
   }
+  else if (type == 'blue') {
+    msg_class = "alert detection_msg";
+    style = "font-weight: bold; font-size: 22px;";
+
+  }
   // $('#console-div').prepend("<div style=\""+style+"\" class=\"" + msg_class + "\">" + " <span class=\"closebtn\">\&times</span><div id=\"console-timestamp\">"+getLocalTimestamp()+"</div> <strong>" + msg_title + "</strong > " + msg + "  </div>");
 
   $('#console-div').prepend("<div style=\""+style+"\" class=\"" + msg_class + "\">" + " <span class=\"closebtn\">\&times</span><strong>" + msg_title + "</strong > " + msg + "  </div>");

@@ -1,6 +1,6 @@
 // Software for the browser-based application for mdeyo automated track timing project
 
-/////////////////////////// Variables Section Start /////////////////////////////
+/////////////////////////// Variables Section Start /////////////////////
 
 // saved_ids is the main data structure for matching incoming scan IDs with
 // the athletes that were added though the interface
@@ -46,9 +46,9 @@ var use_socket = true; //can be false when debugging
 
 var runners_places = {};
 
-/////////////////////////// Variables Section End /////////////////////////////
+/////////////////////////// Variables Section End /////////////////////
 
-////////////////////// Debugging variables Section Start //////////////////////
+////////////////////// Debugging variables Section Start //////////////
 
 // override socket while debugging without the full system
 // use_socket = false;
@@ -56,7 +56,7 @@ var runners_places = {};
 // need one global start for everyone
 // and then each relay has an offset time - not sure which runner will start first
 
-// TODO temporary for MIT XC wilderness loop relays //
+// TODO temporary for MIT XC wilderness loop relays
 
 var wilderness_min_time = 110;
 
@@ -422,10 +422,10 @@ var wilderness_relays_ids = {
     "team_delay": 0
   }
 }
-// TODO temporary for MIT XC wilderness loop relays //
+// TODO temporary for MIT XC wilderness loop relays
 saved_ids = wilderness_relays_ids;
 
-////////////////////// Debugging variables Section End ////////////////////////
+////////////////////// Debugging variables Section End ////////////////
 
 // TODO - need to be able to save a saved_id  json or at least the laps data in a nice format
 
@@ -622,9 +622,9 @@ function convert_to_minutes(seconds) {
 function update_clocks() {
   var date = new Date;
 
-  if (main_timer_active){
-  main_timer_text.innerHTML = convert_to_minutes(Math.floor((date - main_start_time) / 1000));
-}
+  if (main_timer_active) {
+    main_timer_text.innerHTML = convert_to_minutes(Math.floor((date - main_start_time) / 1000));
+  }
 
   for (var id in saved_ids) {
     // if (saved_ids[id].active) {
@@ -752,8 +752,8 @@ function addTagID(id) {
       new_tag_name = 'unknown';
     }
     var d = new Date();
-    // alert(d);                        // -> Sat Feb 28 2004 23:45:26 GMT-0300 (BRT)
-    // alert(d.toLocaleString());       // -> Sat Feb 28 23:45:26 2004
+    // alert(d);                         -> Sat Feb 28 2004 23:45:26 GMT-0300 (BRT)
+    // alert(d.toLocaleString());        -> Sat Feb 28 23:45:26 2004
     var timestamp = d.toLocaleTimeString() + '-' + d.toLocaleDateString();
     saved_ids[id] = {
       'name': new_tag_name,
@@ -796,7 +796,7 @@ function reset_runner_count() {
 }
 
 /////////////////////////////
-/// Socket code section /////
+/// Socket code section /
 /////////////////////////////
 
 if (use_socket) {
@@ -861,24 +861,22 @@ if (use_socket) {
       var lap_time,
         time_since_last;
 
+      // Special timing math for the MIT wilderness relays
       if (wilderness_relay) {
         var teammate_data = saved_ids[athlete_data.teammate_id];
-
         if (athlete_data.last_time) {
           time_since_last = timestamp - athlete_data.last_time;
         } else {
-          time_since_last = 2*wilderness_min_time + 1;
+          time_since_last = 2 * wilderness_min_time + 1;
         }
-
         if (teammate_data.last_time) {
           lap_time = timestamp - teammate_data.last_time;
         } else {
           lap_time = timestamp - start_time - athlete_data.team_delay;
         }
-        if (lap_time > wilderness_min_time && time_since_last > 2*wilderness_min_time) {
+        if (lap_time > wilderness_min_time && time_since_last > 2 * wilderness_min_time) {
           add_console_msg('orange', athlete_name + " - " + convert_to_minutes(lap_time));
           saved_ids[id].last_time = timestamp;
-
           if (saved_ids[id].laps) {
             saved_ids[id].laps.push(lap_time);
           } else {
@@ -886,10 +884,12 @@ if (use_socket) {
           }
           saved_ids[id].lap_count += 1;
         }
-
+        //For a XC race, adding the names of athletes to the list if we scanned
+        // the tag beforehand so that it's in saved_ids
       } else if (xc_race) {
         msg = msg + ":" + athlete_name;
         runners_places[place_str] = msg;
+        // Normal track workout timing math
       } else {
         add_console_msg('orange', 'Registered ' + athlete_name);
         var lap_time = (timestamp - athlete_data.start_time);
@@ -898,6 +898,7 @@ if (use_socket) {
       console.log('Name: ' + athlete_name + " timestamp: " + timestamp.toString());
       console.log('Lap time: ' + (lap_time).toString());
 
+      // Save all global times to log, in case above math doesn
       if (saved_ids[id].global_splits) {
         saved_ids[id].global_splits.push(timestamp);
       } else {
@@ -905,6 +906,7 @@ if (use_socket) {
       }
 
     } else {
+      //For a XC race, all the other runners that we don't have registered in saved_ids
       if (xc_race) {
         runners_places[place_str] = msg; // not a saved runner - still log the data for race places
       }
@@ -912,6 +914,24 @@ if (use_socket) {
     // for both cases, need to increment total count
     increment_runner_count();
   }
+
+  function handleDetection(data){
+    var id = data;
+    //this is a saved runner
+    if (id in saved_ids) {
+      var athlete_data = saved_ids[id];
+      var athlete_name = athlete_data.name;
+      add_console_msg('blue', 'Detected: '  + athlete_name);
+    }
+    else{ //unknown runner tag
+      add_console_msg('blue', 'Detected unknown: '  + id);
+    }
+  }
+
+  socket.on('detection', function(data) {
+    console.log('detection:' + data);
+    handleDetection(data);
+  });
 
   socket.on('result', function(data) {
     console.log('result:' + data);
@@ -936,7 +956,7 @@ if (use_socket) {
     // response to the server-noteside
     // maybe success or failure message?
     response = 'success'
-    //  socket.emit('update-response', response); // raise an event on the server
+    //  socket.emit('update-response', response);  raise an event on the server
   });
 }
 
@@ -976,7 +996,7 @@ function request_time() {
   }
 }
 
-function stop_timer(){
+function stop_timer() {
   main_timer_active = false;
 }
 

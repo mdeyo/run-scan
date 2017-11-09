@@ -170,6 +170,10 @@ def send_result_time(id, timestamp):
     emit_from_read('result', id + ':' + str(timestamp))
 
 
+def send_tag_detection(id):
+    emit_from_read('detection', id)
+
+
 def read_loop():
     global read_flag, saved, currently_scanning, list_to_delete, start_time, paused, resumed
     global sample_id_flag
@@ -234,10 +238,12 @@ def read_loop():
                             #print(t - last_time_stamp[iid])
                         else:
                             if iid in saved:
+                                if saved[iid] == []:
+                                    send_tag_detection(iid)
                                 saved[iid] = saved[iid] + \
                                     [str(rssi) + ':' + str(timestamp)]
-
                             else:
+                                send_tag_detection(iid)
                                 saved[iid] = [str(rssi) + ':' + str(timestamp)]
                             currently_scanning[iid] = t
                             # print(saved)

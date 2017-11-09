@@ -118,6 +118,10 @@ body {
   background-color: #ffdf35;
 }
 
+.alert.detection_msg {
+  background-color: #337AB7;
+}
+
 .closebtn {
   margin-left: 15px;
   color: white;
@@ -223,7 +227,6 @@ img.resize {
   width: 40px;
 }
 
-
 /*.message_group h4 {
   display: inline-block;
 }*/
@@ -288,7 +291,6 @@ img.resize {
   line-height: 70px;
 }
 
-
 /*.section-block {
   width: calc(50% - 10px);
   margin: 5px;
@@ -316,7 +318,6 @@ img.resize {
   line-height: 36px;
 }
 
-
 /*.computer_block button {
   line-height: 20px;
   margin: 5px;
@@ -343,7 +344,6 @@ img.resize {
   top: -1px;
 }
 
-
 /* Dropdown Button */
 
 .dropbtn {
@@ -354,7 +354,6 @@ img.resize {
   background-color: rgba(0, 0, 0, 0);
   line-height: 20px;
 }
-
 
 /* The container <div> - needed to position the dropdown content */
 
@@ -372,7 +371,6 @@ img.resize {
   width: 35%;
 }
 
-
 /* Dropdown Content (Hidden by Default) */
 
 .dropdown-content {
@@ -389,7 +387,6 @@ img.resize {
   text-align: center;
 }
 
-
 /* Links inside the dropdown */
 
 .dropdown-content a {
@@ -399,20 +396,17 @@ img.resize {
   display: block;
 }
 
-
 /* Change color of dropdown links on hover */
 
 .dropdown-content a:hover {
   background-color: #f1f1f1
 }
 
-
 /* Show the dropdown menu on hover */
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 
